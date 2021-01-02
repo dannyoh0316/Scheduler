@@ -9,10 +9,15 @@ interface Props {
     id: string;
     title: string;
     meets: string;
-  }[]
+  }[];
+  view: (course: {
+    id: string;
+    title: string;
+    meets: string;
+  }) => void;
 };
 
-const CourseSelector: React.FC<Props> = ({ courses }) => {
+const CourseSelector: React.FC<Props> = ({ courses, view }) => {
   const [selected, setSelected] = useState<{ id: string; title: string; meets: string; }[] | never>([]);
 
   const toggle = (course: { id: string; title: string; meets: string; }) => setSelected(selected => (
@@ -28,6 +33,7 @@ const CourseSelector: React.FC<Props> = ({ courses }) => {
             isDisabled={hasConflict(course, selected)}
             isSelected={selected.includes(course) ? true : false}
             select={toggle}
+            view={view}
           />
         ))
       }

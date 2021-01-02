@@ -12,11 +12,17 @@ interface Props {
   isDisabled: boolean;
   isSelected: boolean;
   select: (course: { id: string; title: string; meets: string; }) => void;
+  view: (course: {
+    id: string;
+    title: string;
+    meets: string;
+  }) => void;
 };
 
-const Course: React.FC<Props> = ({ course, isDisabled, isSelected, select }) => (
+const Course: React.FC<Props> = ({ course, isDisabled, isSelected, select, view }) => (
   <TouchableOpacity style={styles[isSelected ? 'courseButtonSelected' : isDisabled ? 'courseButtonDisabled' : 'courseButton']}
-    onPress={() => {if (!isDisabled) select(course)}}>
+    onPress={() => {if (!isDisabled) select(course)}}
+    onLongPress={() => view(course)}>
     <Text style={styles.courseText}>
       {`CS ${getCourseNumber(course)}\n${course.meets}`}
     </Text>
