@@ -10,7 +10,7 @@ interface Props {
   };
 };
 
-const getCourseNumber = (course: { id: any; title?: string; meets?: string; }) => (
+const getCourseNumber = (course: { id: string; title?: string; meets?: string; }) => (
   course.id.slice(1)
 );
 
