@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
-import Course from './Course';
+import CourseSelector from './CourseSelector';
 import TermSelector from './TermSelector';
+import { getCourseTerm } from '../utils/course';
 
-
-const termMap: { [key: string]: string } = { F: 'Fall', W: 'Winter', S: 'Spring' };
-
-const getCourseTerm = (course: { id: string; title?: string; meets?: string; }) => (
-  termMap[course.id.charAt(0)]
-);
 
 interface Props {
   courses: {
@@ -26,9 +21,7 @@ const CourseList: React.FC<Props> = ({ courses }) => {
   return (
     <ScrollView>
       <TermSelector selectedTerm={selectedTerm} setSelectedTerm={setSelectedTerm} />
-      <View style={styles.courseList}>
-        {termCourses.map(course => <Course key={course.id} course={course} />)}
-      </View>
+      <CourseSelector courses={termCourses} />
     </ScrollView>
   );
 };
